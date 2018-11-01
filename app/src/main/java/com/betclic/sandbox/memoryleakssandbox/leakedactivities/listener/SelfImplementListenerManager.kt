@@ -3,11 +3,9 @@
  */
 
 package com.betclic.sandbox.memoryleakssandbox.leakedactivities.listener
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class SelfImplementListenerViewModel @Inject constructor() {
+// object means GC root, all variables are static variables
+object SelfImplementListenerManager {
 
     var onDidSomethingListener: OnDidSomethingListener? = null
 

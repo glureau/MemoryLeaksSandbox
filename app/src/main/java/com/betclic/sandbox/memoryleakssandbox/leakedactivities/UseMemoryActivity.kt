@@ -21,19 +21,21 @@ open class UseMemoryActivity : RxAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Single.fromCallable {
-            loadStuffInMemory(20)
-        }
+        Single.fromCallable { loadStuffInMemory(20) }
             .subscribeOn(Schedulers.io())
             .compose(bindToLifecycle())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::memoryLoaded)
+            .subscribe(::memoryLoaded, ::onError)
     }
 
     protected open fun memoryLoaded(bitmapCount: Int) {
         button.text = "Memory loaded"
     }
 
+    protected open fun onError(throwable: Throwable) {
+        throwable.printStackTrace()
+        button.text = "Error"
+    }
 
     /**
      * Load heap memory

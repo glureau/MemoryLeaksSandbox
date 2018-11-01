@@ -20,6 +20,6 @@ class ViewTreeObserverGlobalLayoutActivity : UseMemoryActivity() {
     }
 
     fun updateView(fooBarCount: Int) {
-        button.text = if (fooBarCount % 2 == 0) "even" else "odd"
+        button.text = button.text.toString() + if (fooBarCount % 2 == 0) "even" else "odd"
     }
 }
